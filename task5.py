@@ -4,24 +4,27 @@
 # добавляться к уже подсчитанной сумме. Но если вместо числа вводится специальный символ,
 # выполнение программы завершается. Если специальный символ введен после нескольких чисел,
 # то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
+exit_key = False
+
 def my_func_summ(*args):
-    print(args)
-    input_data = list(args).copy()
-    print(input_data)
+    input_data = args[0]
     sum_data = 0
+    global exit_key
     for index in input_data:
-        if 'q' or 'Q' in in_data:
-            exit_key = True
-            return sum_data
-        sum_data += int(index)
+        try:
+            if 'Q' in index:
+                exit_key = True
+                return sum_data
+            sum_data += int(index)
+        except ValueError:
+            continue
     return sum_data
 
 
 save_memory = 0
-exit_key = False
 while exit_key == False:
-    in_data = input('Введите через пробел любые числа или введите q для выхода\n').split(' ')
-    save_memory = save_memory + my_func_summ(in_data)
-    print(f'Сумма числе равна {save_memory}')
+    in_data = input('Введите через пробел любые числа или введите Q для выхода\n').split(' ')
+    save_memory += my_func_summ(in_data)
+    print(f'Сумма чисел равна {save_memory}')
     continue
-print('The end')
+print('Конец программы')
